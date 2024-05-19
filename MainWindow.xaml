@@ -3,10 +3,36 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:local="clr-namespace:vichmat"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Курсовая работа" Height="640" Width="1200">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.05*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.50*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" TextWrapping="Wrap">
+            <Run Foreground="Black">Введите уравнение</Run>
+        </TextBlock>
+        <TextBox Grid.Column="0" Grid.Row="1" Name="TextBox1" TextWrapping="Wrap" AcceptsReturn="True"
+            VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        </TextBox>
+        <TextBlock Grid.Column="0" Grid.Row="2" TextWrapping="Wrap">
+            <Run Foreground="Black">Результат</Run>
+        </TextBlock>
+        <TextBox Grid.Column="0" Grid.Row="3" Name="TextBox2" TextWrapping="Wrap" AcceptsReturn="True"
+            VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        </TextBox>
+        <Button Grid.Column="0" Grid.Row="4" Content="Рассчитать" Click="Result"/>
+        <oxy:PlotView x:Name="PlotView" Grid.Row="0" Grid.Column="1" Grid.RowSpan='2'   Model="{Binding GraphModel}">
+        </oxy:PlotView>
     </Grid>
 </Window>

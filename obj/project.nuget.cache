@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "+lwu//N+8pbDzH/XSUqoQYzPRIzMulKydys8M/Fps08n5VgtOe3PcRCqZFDoSzikMD4jLX+D5kVNi+V9sOl1Dw==",
+  "dgSpecHash": "EkF14V/+OOHm2oO/BYcZE4krTJPYHizhrmrE9Jg6fVAVg05NX1+08IU4uZUOm8jwXaYhXSi0e0qkR7aCDM2oxw==",
   "success": true,
   "projectFilePath": "C:\\Projects\\C#\\vichmat\\vichmat.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Maximd\\.nuget\\packages\\oxyplot.core\\2.1.2\\oxyplot.core.2.1.2.nupkg.sha512",
+    "C:\\Users\\Maximd\\.nuget\\packages\\oxyplot.wpf\\2.1.2\\oxyplot.wpf.2.1.2.nupkg.sha512",
+    "C:\\Users\\Maximd\\.nuget\\packages\\oxyplot.wpf.shared\\2.1.2\\oxyplot.wpf.shared.2.1.2.nupkg.sha512"
+  ],
   "logs": []
 }
