@@ -11,10 +11,10 @@ namespace vichmat
         private void Result(object sender, RoutedEventArgs e)
         {
             MathParser parser = new MathParser(TextBox1.Text);
-            Dictionary<string, double> variables = parser.ReadExpressionFromStr();
-            foreach(var var_ in variables)
+            List<MathParser.Token> tokens = parser.tokens1;
+            foreach(var token in tokens)
             {
-                TextBox2.Text = $"key: {var_.Key}  value: {Convert.ToString(var_.Value)}";
+                TextBox2.Text += token.name + " - " + token.type.ToString() + "\n";
             }
         }
     }
