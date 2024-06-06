@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("vichmat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ef373ad8d94d9b99181c64316e3c35be7dde5749")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+715d26f006301a15e26f0f8e02929163c512dcc3")]
 [assembly: System.Reflection.AssemblyProductAttribute("vichmat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("vichmat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
