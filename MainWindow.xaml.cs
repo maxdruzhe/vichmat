@@ -1,7 +1,6 @@
 ﻿using System.Windows;
-using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
+using Syncfusion.UI.Xaml.Charts;
+using System.Windows.Media;
 
 namespace vichmat
 {
@@ -9,73 +8,37 @@ namespace vichmat
     public partial class MainWindow : Window
     {
         MathParser parser;
+        ViewModel data = new ViewModel();
         public MainWindow()
         {
             InitializeComponent();
             parser = new MathParser();
+            this.DataContext = data;
         }
-        public PlotModel GraphModel { get; set; }
         //Функция отделения корней
         private List<List<double>> range()
         {
             List<List<double>> rlist = new List<List<double>>();
-            Random rng = new Random();
-            int num_roots = parser.num_roots;
-            double num = parser.num;
-            while(num_roots > 0)
+            int num = (int)parser.num;
+            double a = -num;
+            double b = num;
+            double h = 0.1;
+            double y0, y1;
+            List<double> val1 = new List<double>() {a};
+            y0 = parser.ResultExpr(val1);
+            a += h;
+            do
             {
-                double a = 0 + (rng.NextDouble() * (num - 0));
-                double h = 0.1;
-                double b = a + h;
-                int iteration = 0;
-                while(iteration <= 10000)
+                List<double> val2 = new List<double>() {a};
+                y1 = parser.ResultExpr(val2);
+                if (y0 * y1 < 0)
                 {
-                    List<double> values1 = new List<double>() {a};
-                    List<double> values2 = new List<double>() {b};
-                    double Fa = parser.ResultExpr(values1);
-                    double Fb = parser.ResultExpr(values2);
-                    if (Fa * Fb < 0)
-                    {
-                        List<double> coords = [];
-                        coords.Add(a);
-                        coords.Add(b);
-                        rlist.Add(coords);
-                        break;
-                    }
-                    else
-                    {
-                        if (Fa > 0 && Fb > 0)
-                        {
-                            if(Fa > Fb)
-                            {
-                                a = b;
-                                b += h;
-                            }
-                            else
-                            {
-                                b = a;
-                                a -= h;
-                            }
-                        }
-                        else
-                        {
-                            if(Fa > Fb)
-                            {
-                                b = a;
-                                a -= h;
-                            }
-                            else
-                            {
-                                a = b;
-                                b += h;
-                            }
-                        }
-                    }
-                    iteration ++;
+                    List<double> coord = new List<double>() {a - h, a};
+                    rlist.Add(coord);
                 }
-                num_roots --;
-                num = a;
-            }
+                y0 = y1;
+                a += h;
+            } while(a <= b);
             rlist = rlist.Distinct().ToList();
             rlist = cut(rlist);
             return rlist;
@@ -169,10 +132,10 @@ namespace vichmat
                 }
                 int iter = 0;
                 double d;
-                double l = 1 / rdiff(a, 1);
-                h = Math.Abs(b - a) / 100;
                 double x0 = a;
                 double x1;
+                h = Math.Abs(b - a) / 100;
+                double l = 1 / rdiff(a, h);
                 do
                 {
                     List<double> values = new List<double>() {x0};
@@ -208,8 +171,40 @@ namespace vichmat
                 }
                 if (rlist.Count > 0)
                 {
-                    GraphModel = CreatePlotModel(rlist);
-                    this.DataContext = this;
+                    //Строим график
+                    schart.Series.Clear();
+                    //Массив координат
+                    List<Coords> coords = new List<Coords>();
+                    for (double x = -rlist.Last()[1]; x <= rlist.Last()[1]; x += (2 * rlist.Last()[1]) / 100)
+                    {
+                        Coords coord = new Coords();
+                        coord.X = x;
+                        List<double> list = new List<double>() {x};
+                        coord.Y = parser.ResultExpr(list);
+                        coords.Add(coord);
+                    }
+                    NumericalAxis xAxis = new NumericalAxis()
+                    {
+                        Header = "X",
+                        Minimum = -rlist.Last()[1] * 2,
+                        Maximum = rlist.Last()[1] * 2
+                    };
+                    List<Coords> coords3 = coords.OrderBy(a => a.Y).ToList();
+                    NumericalAxis yAxis = new NumericalAxis()
+                    {
+                        Header = "Y",
+                    };
+                    schart.PrimaryAxis = xAxis;
+                    schart.SecondaryAxis = yAxis;
+                    //Добавляем данные
+                    data.Data = coords;
+                    LineSeries series = new LineSeries()
+                    {
+                        XBindingPath = "X",
+                        YBindingPath = "Y",
+                        ItemsSource = data.Data
+                    };
+                    schart.Series.Add(series);
                 }
             }
             else
@@ -217,28 +212,6 @@ namespace vichmat
                 double result = parser.ResultExpr();
                 TextBox2.Text += "Результат - " + result.ToString();
             }
-        }
-        private PlotModel CreatePlotModel(List<List<double>> rlist)
-        {
-            Func<double, double> resExtr = (x) => parser.ResultExpr(new List<double>() {x});
-            var GraphModel = new PlotModel{ Title = "График функции " + parser.extr };
-            var funcSeries = new FunctionSeries(resExtr, -rlist.Last()[1] * 10, rlist.Last()[1] * 10, 0.1);
-            var yAxis = new LinearAxis
-            { 
-                Position = AxisPosition.Left,
-                Title = "Y Axis" 
-            };
-            var xAxis = new LinearAxis
-            { 
-                Position = AxisPosition.Bottom,
-                Title = "X Axis"  
-            };
-            xAxis.MajorGridlineStyle = LineStyle.Solid;
-            yAxis.MajorGridlineStyle = LineStyle.Solid;
-            GraphModel.Series.Add(funcSeries);
-            GraphModel.Axes.Add(yAxis);
-            GraphModel.Axes.Add(xAxis);
-            return GraphModel;
         }
     }
 }

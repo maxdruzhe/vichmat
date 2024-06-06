@@ -1,12 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "EkF14V/+OOHm2oO/BYcZE4krTJPYHizhrmrE9Jg6fVAVg05NX1+08IU4uZUOm8jwXaYhXSi0e0qkR7aCDM2oxw==",
+  "dgSpecHash": "Jo1v6C/3JT6IL6izkrfS7y62H1l6R4vwK3JE6IqZnhkBYkTjrzAnOSrx0S+6WwMqUSo3X/vYdMKO4aa0AYGVWg==",
   "success": true,
   "projectFilePath": "C:\\Projects\\C#\\vichmat\\vichmat.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Maximd\\.nuget\\packages\\oxyplot.core\\2.1.2\\oxyplot.core.2.1.2.nupkg.sha512",
-    "C:\\Users\\Maximd\\.nuget\\packages\\oxyplot.wpf\\2.1.2\\oxyplot.wpf.2.1.2.nupkg.sha512",
-    "C:\\Users\\Maximd\\.nuget\\packages\\oxyplot.wpf.shared\\2.1.2\\oxyplot.wpf.shared.2.1.2.nupkg.sha512"
+    "C:\\Users\\Maximd\\.nuget\\packages\\syncfusion.licensing\\25.2.7\\syncfusion.licensing.25.2.7.nupkg.sha512",
+    "C:\\Users\\Maximd\\.nuget\\packages\\syncfusion.sfchart.wpf\\25.2.7\\syncfusion.sfchart.wpf.25.2.7.nupkg.sha512"
   ],
   "logs": []
 }

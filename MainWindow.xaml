@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:local="clr-namespace:vichmat"
+        xmlns:chart="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
         mc:Ignorable="d"
         Title="Курсовая работа" Height="640" Width="1200">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.05*"></RowDefinition>
@@ -32,7 +34,9 @@
             VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         </TextBox>
         <Button Grid.Column="0" Grid.Row="4" Content="Рассчитать" Click="Result"/>
-        <oxy:PlotView x:Name="PlotView" Grid.Row="0" Grid.Column="1" Grid.RowSpan='2'   Model="{Binding GraphModel}">
-        </oxy:PlotView>
+        <GroupBox Name="GBox" Header="График" Grid.Row="1" Grid.Column="1" Grid.RowSpan='4'>
+            <chart:SfChart Name="schart" Height="300" Width="500">
+            </chart:SfChart>
+        </GroupBox>
     </Grid>
 </Window>

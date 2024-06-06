@@ -9,8 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="oxyplot.core" Version="2.1.2" />
-    <PackageReference Include="oxyplot.wpf" Version="2.1.2" />
+    <PackageReference Include="Syncfusion.SfChart.WPF" Version="25.2.7" />
   </ItemGroup>
 
 </Project>
